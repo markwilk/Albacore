@@ -69,6 +69,7 @@ a:hover, a:active {
 }
 
 .sidebar_item.social {
+	width:100%;
 	overflow:auto;
 }
 
