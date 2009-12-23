@@ -66,6 +66,7 @@ a:hover, a:active {
   border-left: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
   text-align: center;
+	overflow:auto;
 }
 
 .sidebar_item a.icon {margin:0;padding:0;display:block; 
