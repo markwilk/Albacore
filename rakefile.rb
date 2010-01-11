@@ -112,6 +112,13 @@ namespace :specs do
     t.spec_files = 'spec/docu*_spec.rb'
     t.spec_opts << @spec_opts
   end
+
+  desc "FxCop functional specs"
+  Spec::Rake::SpecTask.new :fxcop do |t|
+    t.spec_files = 'spec/fxcop*_spec.rb'
+    t.spec_opts << @spec_opts
+  end
+
 end
 
 namespace :albacore do  
@@ -125,7 +132,8 @@ namespace :albacore do
                      'albacore:rename',  
                      'albacore:mspec',
                      'albacore:nunit',
-                     'albacore:xunit']
+                     'albacore:xunit',
+                     'albacore:fxcop']
   
   desc "Run a sample build using the MSBuildTask"
   msbuild do |msb|
@@ -233,6 +241,13 @@ namespace :albacore do
     xbuild.properties :configuration => :release, :platform => 'Any CPU'
     xbuild.targets :clean, :build
     xbuild.solution = "spec/support/TestSolution/TestSolution.sln"
+  end
+
+  desc "FxCop Runner Example"
+  fxcop do |fxcop|
+    fxcop.path_to_command = "spec/support/Tools/FxCop-v1.36/FxCopCmd.exe"
+    fxcop.assemblies "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll", "spec/support/CodeCoverage/nunit/assemblies/TestSolution.dll"
+    fxcop.output_path = "spec/support/CodeCoverage/fxcop/output/output.xml"
   end
 end
 
